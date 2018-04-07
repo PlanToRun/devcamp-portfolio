@@ -36,7 +36,7 @@ def update
   end
 
   def show
-   @portfolio = Portfolio.find(params[:id]) 
+   @portfolio = Portfolio.find(params[:id])
   end
 
   def destroy
