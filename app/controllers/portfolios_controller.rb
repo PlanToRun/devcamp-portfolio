@@ -1,17 +1,18 @@
 class PortfoliosController < ApplicationController
-  layout "portfolio"
+  before_action :set_portfolio, only: [:edit, :show, :update, :destroy]
+  layout 'portfolio'
   
   def index
-	@portfolio = Portfolio.all
+    @portfolio = Portfolio.all
   end
 
   def angular
     @angular_portfolio = Portfolio.angular
-end
+  end
 
-def new
-	@portfolio = Portfolio.new
-  3.times { @portfolio.technologies.build }
+  def new
+    @portfolio = Portfolio.new
+    3.times { @portfolio.technologies.build }
   end
 
   def create
@@ -19,23 +20,20 @@ def new
 
     respond_to do |format|
       if @portfolio.save
-        format.html { redirect_to portfolios_path, notice: 'Your portfolio is now live.' }
+        format.html { redirect_to portfolios_path, notice: 'Your portfolio item is now live.' }
       else
         format.html { render :new }
       end
     end
   end
 
- def edit
-  @portfolio = Portfolio.find(params[:id])
-end
+  def edit
+  end
 
-def update
-   @portfolio = Portfolio.find(params[:id])
-
+  def update
     respond_to do |format|
       if @portfolio.update(portfolio_params)
-        format.html { redirect_to portfolios_path, notice: 'The record was successfully updated.' }
+        format.html { redirect_to portfolios_path, notice: 'The record successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -43,17 +41,13 @@ def update
   end
 
   def show
-   @portfolio = Portfolio.find(params[:id])
   end
 
   def destroy
-    # this is going to perform the lookup
-    @portfolio = Portfolio.find(params[:id]) 
-
-    # thie si going to destroy/ delete the record
+    # Destroy/delete the record
     @portfolio.destroy
 
-    # redirect
+    # Redirect
     respond_to do |format|
       format.html { redirect_to portfolios_url, notice: 'Record was removed.' }
     end
@@ -62,11 +56,14 @@ def update
   private
 
   def portfolio_params
-    params.require(:portfolio).permit(:title, 
-                                      :subtitle, 
-                                      :body, 
+    params.require(:portfolio).permit(:title,
+                                      :subtitle,
+                                      :body,
                                       technologies_attributes: [:name]
-                                      )
+                                     )
   end
 
+  def set_portfolio
+    @portfolio = Portfolio.find(params[:id])
+  end
 end
