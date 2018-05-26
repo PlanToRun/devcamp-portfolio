@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/PlanToRun/sanna_view_tool
+  revision: 0843f1d470c1869de7864a0b9ddcf2d4631c6208
+  specs:
+    sanna_view_tool (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -203,6 +209,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.5)
   rails-html-sanitizer (~> 1.0, >= 1.0.4)
+  sanna_view_tool!
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)
